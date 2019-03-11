@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19003,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 27791,
+  "expoServerNgrokUrl": "https://6d-bx7.romi.todolist-romi.exp.direct",
+  "packagerNgrokUrl": "https://packager.6d-bx7.romi.todolist-romi.exp.direct",
+  "ngrokPid": 27817,
   "webpackServerPort": null
 }
