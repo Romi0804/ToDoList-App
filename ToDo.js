@@ -1,14 +1,68 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions
+} from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 export default class ToDo extends Component {
+  state = {
+    isEditing: false,
+    isCompleted: false
+  };
   render() {
+    const { isCompleted } = this.state;
     return (
-      <View>
-        <Text> Hi James</Text>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={this._toggleComplete}>
+          <View
+            style={[
+              styles.circle,
+              isCompleted ? styles.completedCircle : styles.uncompletedCircle
+            ]}
+          />
+        </TouchableOpacity>
+        <Text style={styles.text}> Hi James</Text>
       </View>
     );
   }
+  _toggleComplete = () => {
+    this.setState(prevState => {
+      return {
+        isCompleted: !prevState.isCompleted
+      };
+    });
+  };
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width: width - 70,
+    borderBottomColor: "#bbb",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  text: {
+    fontWeight: "600",
+    fontSize: 20,
+    marginVertical: 20
+  },
+  circle: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderWidth: 3,
+    marginRight: 20
+  },
+  completedCircle: {
+    borderColor: "#bbb"
+  },
+  uncompletedCircle: {
+    borderColor: "red"
+  }
+});
