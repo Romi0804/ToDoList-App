@@ -4,7 +4,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  TextInput
 } from "react-native";
 
 const { width, height } = Dimensions.get("window");
@@ -12,10 +13,12 @@ const { width, height } = Dimensions.get("window");
 export default class ToDo extends Component {
   state = {
     isEditing: false,
-    isCompleted: false
+    isCompleted: false,
+    toDoValue: ""
   };
   render() {
     const { isCompleted, isEditing } = this.state;
+    const { text, toDoValue } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.column}>
@@ -27,14 +30,29 @@ export default class ToDo extends Component {
               ]}
             />
           </TouchableOpacity>
-          <Text
-            style={[
-              styles.text,
-              isCompleted ? styles.completedText : styles.uncompletedText
-            ]}
-          >
-            Hi James
-          </Text>
+          {isEditing ? (
+            <TextInput
+              style={[
+                styles.input,
+                styles.text,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+              value={toDoValue}
+              multiline={true}
+              onChangeText={this._controlInput}
+              returnKeyType={"done"}
+              onBlur={this._finishEditing}
+            />
+          ) : (
+            <Text
+              style={[
+                styles.text,
+                isCompleted ? styles.completedText : styles.uncompletedText
+              ]}
+            >
+              {text}
+            </Text>
+          )}
         </View>
         {isEditing ? (
           <View style={styles.actions}>
@@ -69,14 +87,19 @@ export default class ToDo extends Component {
     });
   };
   _startEditing = () => {
+    const { text } = this.props;
     this.setState({
-      isEditing: true
+      isEditing: true,
+      toDoValue: text
     });
   };
   _finishEditing = () => {
     this.setState({
       isEditing: false
     });
+  };
+  _controlInput = text => {
+    this.setState({ toDoValue: text });
   };
 }
 
@@ -117,6 +140,7 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: "row",
     alignItems: "center",
+    width: width / 3,
     justifyContent: "space-between"
   },
   actions: {
@@ -125,5 +149,9 @@ const styles = StyleSheet.create({
   actionContainer: {
     marginVertical: 10,
     marginHorizontal: 10
+  },
+  input: {
+    marginVertical: 10,
+    width: width / 3
   }
 });
