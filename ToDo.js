@@ -140,8 +140,7 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: "row",
     alignItems: "center",
-    width: width / 3,
-    justifyContent: "space-between"
+    width: width / 3
   },
   actions: {
     flexDirection: "row"
