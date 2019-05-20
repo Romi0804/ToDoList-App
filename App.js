@@ -99,6 +99,21 @@ export default class App extends React.Component {
       return { ...newState };
     });
   };
+  _uncompleteToDo = id => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        toDos: {
+          ...prevState.toDos,
+          [id]: {
+            ...prevState.toDos[id],
+            isCompleted: false
+          }
+        }
+      };
+      return { ...newState };
+    });
+  };
 }
 
 const styles = StyleSheet.create({
