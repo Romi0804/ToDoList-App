@@ -113,20 +113,21 @@ export default class App extends React.Component {
       };
       return { ...newState };
     });
-    _completeToDo = id => {
-      this.setState(prevState => {
-        const newState = {
-          ...prevState,
-          toDos: {
-            ...prevState.toDos,
-            [id]: {
-              ...prevState.toDos[id],
-              isCompleted: true
-            }
+  };
+  _completeToDo = id => {
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        toDos: {
+          ...prevState.toDos,
+          [id]: {
+            ...prevState.toDos[id],
+            isCompleted: true
           }
-        };
-        return { ...newState };
-    }
+        }
+      };
+      return { ...newState };
+    });
   };
 }
 
